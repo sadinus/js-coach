@@ -1,14 +1,19 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import { ClientOnly } from "#/components/ClientOnly";
+import { CoachApp } from "#/components/CoachApp";
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-  return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold">Welcome to TanStack Start</h1>
-      <p className="mt-4 text-lg">
-        Edit <code>src/routes/index.tsx</code> to get started.
-      </p>
-    </div>
-  )
+	return (
+		<ClientOnly
+			fallback={
+				<div className="flex h-screen items-center justify-center bg-zinc-950 text-zinc-400">
+					Loading JS Coach…
+				</div>
+			}
+		>
+			<CoachApp />
+		</ClientOnly>
+	);
 }
